@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hate Speech Against Women - Educational Materials</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const applyFiltersButton = document.querySelector('.btn-primary');
+            applyFiltersButton.addEventListener('click', () => {
+                const trainingModule = document.querySelector('#training-module').value;
+                console.log(`Filter applied with Training Module: ${trainingModule}`);
+                // Add dynamic filtering logic here
+                alert(`Filters applied: Training Module = ${trainingModule}`);
+            });
+        });
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Education Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <form class="d-flex mx-auto" id="search-form">
+                <input class="form-control me-2" type="search" id="search-input" placeholder="Search documents..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Materials</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Trainings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <aside class="col-12 col-md-3 col-lg-2 sidebar bg-light p-3 border-end">
+                <h5>Filter Materials</h5>
+                <form id="filter-form">
+                    <!-- Filter Groups -->
+
+                    <div class="accordion" id="filterAccordion">
+                        <!-- General Accordion -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingGeneral">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
+                                    General
+                                </button>
+                            </h2>
+                            <div id="collapseGeneral" class="accordion-collapse collapse show" aria-labelledby="headingGeneral" data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <!-- Training Module Filter -->
+                                    <div class="mb-3">
+                                        <label for="training-module" class="form-label">Training Module</label>
+                                        <select id="training-module" name="training-module" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                    
+                                    <!-- Content Format Filter -->
+                                    <div class="mb-3">
+                                        <label for="content-format" class="form-label">Content Format</label>
+                                        <select id="content-format" name="content-format" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="website">Website</option>
+                                            <option value="web-article">Web Based Article</option>
+                                            <option value="video">Video</option>
+                                            <option value="pdf-report">PDF Report</option>
+                                            <option value="interactive-module">Interactive Module</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Target Audience Accordion -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTargetAudience">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTargetAudience" aria-expanded="false" aria-controls="collapseTargetAudience">
+                                    Target Audience
+                                </button>
+                            </h2>
+                            <div id="collapseTargetAudience" class="accordion-collapse collapse" aria-labelledby="headingTargetAudience" data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <!-- Gender Filter -->
+                                    <div class="mb-3">
+                                        <label for="gender" class="form-label">Gender</label>
+                                        <select id="gender" name="gender" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="men">Men</option>
+                                            <option value="women">Women</option>
+                                        </select>
+                                    </div>
+                    
+                                    <!-- Occupation Filter -->
+                                    <div class="mb-3">
+                                        <label for="occupation" class="form-label">Occupation</label>
+                                        <select id="occupation" name="occupation" class="form-select">
+                                            <option value="all">All</option>
+                                            <option value="aviation">Airport and aviation industry personnel</option>
+                                            <option value="community">Community Members</option>
+                                            <option value="practitioners">Practitioners</option>
+                                            <option value="policy-makers">Policy Makers</option>
+                                            <option value="educational">Education Specialists</option>
+                                            <option value="healthcare">Health Care Providers</option>
+                                            <option value="law-enforcement">Law Enforcement</option>
+                                            <option value="climate-advocates">Climate Change Advocates</option>
+                                            <option value="researchers">Researchers</option>
+                                            <option value="school-practitioners">School Based Practitioners</option>
+                                            <option value="sports-practitioners">Sport Practitioners</option>
+                                            <option value="platform-users">Platform Users</option>
+                                            <option value="service-providers">Service Providers</option>
+                                            <option value="policy-advocates">Policy Makers/ Advocates</option>
+                                            <option value="community-practitioners">Community Members & Practitioners</option>
+                                            <option value="law-practitioners">Law Enforcement & Practitioners</option>
+                                            <option value="research-policy">Researchers & Policy Makers</option>
+                                            <option value="behavior-practitioners">Practitioners (Interested in Behavior Change Approach)</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Purpose Accordion -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingContentPurpose">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContentPurpose" aria-expanded="false" aria-controls="collapseContentPurpose">
+                                    Content Purpose
+                                </button>
+                            </h2>
+                            <div id="collapseContentPurpose" class="accordion-collapse collapse" aria-labelledby="headingContentPurpose" data-bs-parent="#filterAccordion">
+                                <div class="accordion-body">
+                                    <label for="content-purpose" class="form-label">Content Purpose</label>
+                                    <select id="content-purpose" name="content-purpose" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="prevention">Prevention</option>
+                                        <option value="mitigation">Mitigation/Response</option>
+                                        <option value="both">Both</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Who the content is about Accordion -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingWhoContentIsAbout">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWhoContentIsAbout" aria-expanded="false" aria-controls="collapseWhoContentIsAbout">
+                                Who the content is about
+                            </button>
+                        </h2>
+                        <div id="collapseWhoContentIsAbout" class="accordion-collapse collapse" aria-labelledby="headingWhoContentIsAbout" data-bs-parent="#filterAccordion">
+                            <div class="accordion-body">
+                                <!-- Age Group Filter -->
+                                <div class="mb-3">
+                                    <label for="age-group" class="form-label">Age Group</label>
+                                    <select id="age-group" name="age-group" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="minor">Minor (under 18)</option>
+                                        <option value="adult">Adult (18+)</option>
+                                        <option value="elderly">Elderly</option>
+                                    </select>
+                                </div>
+                                <!-- Gender Filter -->
+                                <div class="mb-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select id="gender" name="gender" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="non-binary">Non-Binary</option>
+                                    </select>
+                                </div>
+                                <!-- Sexual Orientation Filter -->
+                                <div class="mb-3">
+                                    <label for="sexual-orientation" class="form-label">Sexual Orientation</label>
+                                    <select id="sexual-orientation" name="sexual-orientation" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="heterosexual">Heterosexual</option>
+                                        <option value="queer">Queer</option>
+                                    </select>
+                                </div>
+                                <!-- Ethnicity Filter -->
+                                <div class="mb-3">
+                                    <label for="ethnicity" class="form-label">Ethnicity</label>
+                                    <select id="ethnicity" name="ethnicity" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="african">African or African Diaspora</option>
+                                        <option value="asian">Asian</option>
+                                        <option value="european">European</option>
+                                        <option value="hispanic">Hispanic or Latino</option>
+                                        <option value="indigenous">Indigenous Peoples</option>
+                                        <option value="mena">Middle Eastern or North African (MENA)</option>
+                                        <option value="pacific-islander">Pacific Islander/Oceanian</option>
+                                        <option value="multiracial">Multiracial</option>
+                                    </select>
+                                </div>
+                                <!-- Diğer Filtreler -->
+                                <!-- Aynı şekilde eklemeniz gereken filtreler -->
+                            <!-- Education Level Filter -->
+                                <div class="mb-3">
+                                    <label for="education-level" class="form-label">Education Level</label>
+                                    <select id="education-level" name="education-level" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="no-education">Education Issues</option>
+                                        <option value="primary">Primary Education</option>
+                                        <option value="secondary">Secondary Education</option>
+                                        <option value="post-secondary">Post Secondary Education</option>
+                                        <option value="tertiary">Higher/Tertiary Education</option>
+                                    </select>
+                                </div>
+                                <!-- Disability Status Filter -->
+                                <div class="mb-3">
+                                    <label for="disability-status" class="form-label">Disability Status</label>
+                                    <select id="disability-status" name="disability-status" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <!-- Disability Type Filter -->
+                                <div class="mb-3">
+                                    <label for="disability-type" class="form-label">Disability Type</label>
+                                    <select id="disability-type" name="disability-type" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="cognitive/intellectual-disabilities">Cognitive/Intellectual Disabilities</option>
+                                        <option value="physical-disabilities">Physical Disabilities</option>
+                                        <option value="sensory-disabilities">Sensory Disabilities</option>
+                                        <option value="mental-health-disabilities">Mental Health Disabilities</option>
+
+                                    </select>
+                                </div>
+                                <!-- Migration Status Filter -->
+                                <div class="mb-3">
+                                    <label for="migration-status" class="form-label">Migration Status</label>
+                                    <select id="migration-status" name="migration-status" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="native">Native Born/Non-Migrant</option>
+                                        <option value="internal-migrant">Internal Migrant</option>
+                                        <option value="international-migrant">International Migrant</option>
+                                    </select>
+                                </div>
+                                <!-- Marital Status Filter -->
+                                <div class="mb-3">
+                                    <label for="marital-status" class="form-label">Marital Status</label>
+                                    <select id="marital-status" name="marital-status" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="single">Single</option>
+                                        <option value="married">Married</option>
+                                        <option value="divorced">Divorced</option>
+                                        <option value="separated">Separated</option>
+                                        <option value="widowed">Widowed</option>
+                                    </select>
+                                </div>
+                                <!-- Urban/Rural Filter -->
+                                <div class="mb-3">
+                                    <label for="urban-rural" class="form-label">Urban/Rural</label>
+                                    <select id="urban-rural" name="urban-rural" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="urban">Urban</option>
+                                        <option value="rural">Rural</option>
+                                    </select>
+                                </div>
+                                <!-- Medical Condition Filter -->
+                                <div class="mb-3">
+                                    <label for="medical-condition" class="form-label">Medical Condition</label>
+                                    <input type="text" id="medical-condition" name="medical-condition" class="form-control" placeholder="Enter medical condition">
+                                </div>
+                                <!-- Religion Filter -->
+                                <div class="mb-3">
+                                    <label for="religion" class="form-label">Religion</label>
+                                    <select id="religion" name="religion" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <!-- Political View Filter -->
+                                <div class="mb-3">
+                                    <label for="political-view" class="form-label">Political View</label>
+                                    <select id="political-view" name="political-view" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="yes">Yes</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <!-- Occupation Filter -->
+                                <div class="mb-3">
+                                    <label for="occupation" class="form-label">Occupation</label>
+                                    <select id="occupation" name="occupation_about" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="students">Students</option>
+                                        <option value="journalists">Journalists</option>
+                                        <option value="women's-rights-activists">Women's Rights Activists</option>
+                                        <option value="women-human-rights-defenders">Women Human Rights Defenders</option>
+                                        <option value="women-in-public-life">Women in Public Life</option>
+                                        <option value="writers">Writers</option>
+                                        <option value="women-in-parliament">Women in Parliament</option>
+                                        <option value="women-politicians">Women Politicians</option>
+                                        <option value="peacebuilders">Peacebuilders</option>
+                                        <option value="women-environmental-human-rights-defenders">Women Environmental Human Rights Defenders</option>
+                                        <option value="climate-change-advocates">Climate Change Advocates</option>
+                                        <option value="migrant-workers">Migrant Workers</option>
+                                        <option value="women-in-civil-society">Women in Civil Society</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- Document Informations Accordion -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingDocumentInformations">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDocumentInformations" aria-expanded="false" aria-controls="collapseDocumentInformations">
+                                Document Informations
+                            </button>
+                        </h2>
+                        <div id="collapseDocumentInformations" class="accordion-collapse collapse" aria-labelledby="headingDocumentInformations" data-bs-parent="#filterAccordion">
+                            <div class="accordion-body">
+                                <!-- Content Location Filter -->
+                                <div class="mb-3">
+                                    <label for="content-location" class="form-label">Content Location</label>
+                                    <select id="content-location" name="content-location" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="africa">Africa</option>
+                                        <option value="albania">Albania</option>
+                                        <option value="arab-states">Arab States</option>
+                                        <option value="asia">Asia</option>
+                                        <option value="australia">Australia</option>
+                                        <option value="bangladesh">Bangladesh</option>
+                                        <option value="cameroon">Cameroon</option>
+                                        <option value="canada">Canada</option>
+                                        <option value="cambodia">Cambodia</option>
+                                        <option value="china">China</option>
+                                        <option value="cuba">Cuba</option>
+                                        <option value="democratic-republic-of-congo">Democratic Republic of Congo</option>
+                                        <option value="ecuador">Ecuador</option>
+                                        <option value="ethiopia">Ethiopia</option>
+                                        <option value="europe">Europe</option>
+                                        <option value="georgia">Georgia</option>
+                                        <option value="ghana">Ghana</option>
+                                        <option value="global">Global</option>
+                                        <option value="guatemala">Guatemala</option>
+                                        <option value="india">India</option>
+                                        <option value="iraq">Iraq</option>
+                                        <option value="jordan">Jordan</option>
+                                        <option value="kenya">Kenya</option>
+                                        <option value="latin-america-and-the-carriabean">Latin America and the Caribbean</option>
+                                        <option value="lebanon">Lebanon</option>
+                                        <option value="low-and-middle-income-countries">Low and Middle Income Countries</option>
+                                        <option value="malaysia">Malaysia</option>
+                                        <option value="mexico">Mexico</option>
+                                        <option value="mozambique">Mozambique</option>
+                                        <option value="migrant-workers">Migrant Workers</option>
+                                        <option value="morocco">Morocco</option>
+                                        <option value="namibia">Namibia</option>
+                                        <option value="nepal">Nepal</option>
+                                        <option value="nigeria">Nigeria</option>
+                                        <option value="pakistan">Pakistan</option>
+                                        <option value="palestine">Palestine</option>
+                                        <option value="philippines">Philippines</option>
+                                        <option value="political-political-change">Political Political Change</option>
+                                        <option value="romania">Romania</option>
+                                        <option value="south-africa">South Africa</option>
+                                        <option value="south-sudan">South Sudan</option>
+                                        <option value="sierra-leone">Sierra Leone</option>
+                                        <option value="tanzania">Tanzania</option>
+                                        <option value="the-gambia">The Gambia</option>
+                                        <option value="togo">Togo</option>
+                                        <option value="turkey">Turkey</option>
+                                        <option value="united-kingdom">United Kingdom</option>
+                                        <option value="united-states">United States</option>
+                                        <option value="uganda">Uganda</option>
+                                        <option value="vietnam">Vietnam</option>
+                                        <option value="zambia">Zambia</option>
+                                        <option value="zimbabwe">Zimbabwe</option>                                        
+                                    </select>
+                                </div>
+                                <!-- Publisher Filter -->
+                                <div class="mb-3">
+                                    <label for="publisher" class="form-label">Publisher</label>
+                                    <select id="publisher" name="publisher" class="form-select">
+                                        <option value="all">All</option>
+                                        <option value="adb-asia-development-blog">ADB (Asia Development Blog)</option>
+                                        <option value="african-commission-on-the-protection-and-peoples-rights-achpr">African Commission on the Protection and People's Rights (ACHPR)</option>
+                                        <option value="amnesty-international">Amnesty International</option>
+                                        <option value="australia-aid-unfpa-un-women-unicef">Australia Aid, UNFPA, UN Women, UNICEF</option>
+                                        <option value="center-for-excellence-for-womens-health">Center for Excellence for Women's Health</option>
+                                        <option value="columbia">Columbia</option>
+                                        <option value="council-of-europe">Council of Europe</option>
+                                        <option value="data2x">Data2x</option>
+                                        <option value="department-of-homeland-security">Department of Homeland Security</option>
+                                        <option value="end-violence-against-women-international">End Violence Against Women International</option>
+                                        <option value="eige-european-institute-for-gender-equality">European Institute for Gender Equality (EIGE)</option>
+                                        <option value="european-commission">European Commission</option>
+                                        <option value="european-union-south-sudan-law-society">European Union, South Sudan Law Society</option>
+                                        <option value="ford-foundation">Ford Foundation</option>
+                                        <option value="georgetown-institute-for-women-peace-and-security">Georgetown Institute for Women, Peace, and Security</option>
+                                        <option value="government-of-canada">Government of Canada</option>
+                                        <option value="international-womens-media-foundation">International Women's Media Foundation</option>
+                                        <option value="national-democratic-institute-ind">National Democratic Institute (IND)</option>
+                                        <option value="national-institute-of-justice">National Institute of Justice</option>
+                                        <option value="national-library-of-medicine">National Library of Medicine</option>
+                                        <option value="ohchr-united-nations-human-rights-office-of-the-high-commission">OHCHR (United Nations Human Rights Office of the High Commission)</option>
+                                        <option value="organization-of-american-states-oas">Organization of American States (OAS)</option>
+                                        <option value="peace-operations-training-institute">Peace Operations Training Institute</option>
+                                        <option value="prevention-collaborative">Prevention Collaborative</option>
+                                        <option value="reliefweb">ReliefWeb</option>
+                                        <option value="sage-journal">Sage Journal</option>
+                                        <option value="south-africa">South Africa</option>
+                                        <option value="students">Students</option>
+                                        <option value="trinidad-and-tobago">Trinidad and Tobago</option>
+                                        <option value="un-global-compact-academy">UN Global Compact Academy</option>
+                                        <option value="unfpa">UNFPA</option>
+                                        <option value="united-nations-girls-initiative-ungei">United Nations Girls' Initiative (UNGEI)</option>
+                                        <option value="un-women">UN Women</option>
+                                        <option value="un-women-unfpa-who-undp-unodc">UN Women, UNFPA, WHO, UNDP & UNODC</option>
+                                        <option value="united-states">United States</option>
+                                        <option value="usaid">USAID</option>
+                                        <option value="white-house">White House</option>
+                                        <option value="world-bank">World Bank</option>
+                                        <option value="world-health-organization-who">World Health Organization (WHO)</option>
+
+                                    </select>
+                                </div>
+                                <!-- Year of Publication Filter -->
+                                <div class="mb-3">
+                                    <label for="publication-year" class="form-label">Year of Publication</label>
+                                    <div class="date-range">
+                                        <input type="number" id="publication-start-year" name="publication-start-year" class="form-control" 
+                                            min="1900" max="2100" step="1" placeholder="Start Year (YYYY)">
+                                        <span class="w-100 text-start">to</span>
+                                        <input type="number" id="publication-end-year" name="publication-end-year" class="form-control" 
+                                            min="1900" max="2100" step="1" placeholder="End Year (YYYY)">
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                
+
+
+                    
+                    <!-- Filter Button -->
+                    <!-- Apply Filters Butonu -->
+                    <button type="button" class="btn btn-primary w-100" id="apply-filters">Apply Filters</button>
+
+                    <!-- Reset Filters Butonu (Apply Filters'ın Altında) -->
+                    <button type="button" class="btn btn-secondary w-100 mt-2" id="reset-filters">Reset Filters</button>
+
+                </form>
+            </aside>
+
+            <!-- Content -->
+            <main class="col-12 col-md-9 col-lg-10 p-4">
+                <h1 class="h2 border-bottom pb-3">Educational Materials</h1>
+                <div id="materials" class="row g-4">
+                    <!-- Dinamik Materyaller Buraya Gelecek -->
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+   <!-- Chatbot Icon -->
+    <div id="chatbot-icon" class="position-fixed bottom-0 end-0 m-4" onclick="openChatbot()">
+        <img src="{{ url_for('static', filename='chat-icon.png') }}" alt="Chat Bot" class="rounded-circle shadow" style="cursor: pointer;">
+    </div>
+
+    <!-- Harici JavaScript Dosyasını Dahil Et -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>

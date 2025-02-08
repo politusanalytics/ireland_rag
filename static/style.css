@@ -1,0 +1,271 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    height: 80vh; /* Ekranın %80 yüksekliğini kullan */
+    max-height: 80vh; /* Maksimum yükseklik belirle */
+    position: sticky;
+    top: 0;
+    overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
+}
+
+
+.sidebar h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.sidebar .filter-group {
+    margin-bottom: 20px;
+}
+
+.sidebar .filter-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.sidebar .filter-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.sidebar .filter-group .sub-category {
+    padding-left: 20px;
+    font-size: 13px;
+    color: #666;
+}
+
+.sidebar .btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sidebar .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Header Groups */
+.sidebar .filter-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.sidebar .filter-header .sub-category {
+    padding-left: 15px;
+    font-size: 14px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        height: auto;
+        padding: 15px;
+    }
+
+    .sidebar h5 {
+        font-size: 16px;
+    }
+
+    .sidebar .filter-group {
+        margin-bottom: 15px;
+    }
+
+    .sidebar .filter-group label {
+        font-size: 12px;
+    }
+
+    .sidebar .filter-group select {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .sidebar .btn {
+        font-size: 14px;
+    }
+
+    .sidebar .filter-header {
+        font-size: 14px;
+    }
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+}
+
+main h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+/* Chatbot Icon */
+#chatbot-icon {
+    width: 120px;
+    height: 120px;
+    background-color: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#chatbot-icon img {
+    width: 70%;
+    height: 70%;
+}
+
+#chatbot-icon:hover {
+    transform: scale(1.1);
+}
+
+.accordion-button {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  outline: none;
+}
+
+.accordion-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  color: white;
+  background-color: #0056b3;
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+
+.accordion-body {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+.date-range {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.date-range span {
+  margin-left: auto; /* Ortalayabilirsiniz veya hizalayabilirsiniz */
+}
+#materials .card {
+    height: 220px; /* Kartın maksimum yüksekliğini belirle */
+    overflow: hidden; /* Taşan içeriği gizle */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* İçerikleri düzgün hizala */
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+}
+
+/* Başlık için stil (Uzunsa "..." ile kısalt) */
+#materials .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    max-height: 50px; /* 2 satırdan fazla olmasın */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* Tek satırda göster */
+}
+
+/* Açıklama için stil (En fazla 3 satır göstersin, fazlası "..." ile kırılsın) */
+#materials .card-text {
+    font-size: 14px;
+    max-height: 70px; /* Açıklamalar için maksimum yükseklik belirle */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* En fazla 3 satır göstersin */
+    -webkit-box-orient: vertical;
+}
+
+body {
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 800px;
+    height: 75vh;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.chat-box {
+    flex-grow: 1;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.user-message {
+    text-align: right;
+    color: white;
+    background: #007bff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    max-width: 80%;
+}
+
+.bot-message {
+    text-align: left;
+    color: black;
+    background: #e9ecef;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    display: inline-block;
+    max-width: 80%;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    color: gray;
+}

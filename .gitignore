@@ -1,0 +1,15 @@
+.env
+# Ortak gereksiz dosyalar
+__pycache__/
+.DS_Store
+*.log
+*.sqlite3
+*.safetensors
+
+# Sanal ortam klasörü (Python)
+venv/
+rag_env/
+
+# FAISS ve büyük veri klasörleri
+rag/Training Module Files/
+Training Module Files/
