@@ -68,7 +68,7 @@ def get_document_links(relevant_docs):
             link = db_doc.get("link", "#")  # Default '#' if no valid link
             file_name = db_doc.get("file_name", "Unknown File")
             print(f"✅ [MATCH] {file_name} → {link}")  # Debugging
-            document_links.append(f'<a href="{link}" target="_blank">Source {len(document_links) + 1}</a>')
+            document_links.append(f'<a href="{link}" target="_blank">{link[:60]}...</a>')
         else:
             print(f"❌ [NO MATCH] {cleaned_file_name} not found in MongoDB!")  
 
@@ -112,27 +112,40 @@ def answer_query(query, retriever, embedding_model):
 
     # ✅ **Filter Out Documents Below Similarity Threshold**
     filtered_docs = []
+    filtered_docs_low_sim = []
     for doc in relevant_docs:
         similarity_score = compute_text_similarity(query, doc.page_content, embedding_model)
         print(f"🔍 [DEBUG] Similarity Score: {similarity_score}")  # Debugging
-        if similarity_score > 0.6:  # Only keep highly relevant results
+        if similarity_score >= 0.65:  # Highly relevant
             filtered_docs.append(doc)
+        elif 0.55 <= similarity_score < 0.65:  # Low relevance
+            filtered_docs_low_sim.append(doc)
 
-    # If no relevant documents remain, return default response
+    # ✅ **Handle No High Similarity Results**
+    disclaimer = ""  # Default (no disclaimer)
+    
     if not filtered_docs:
-        return """
-        <strong>📌 No relevant documents found.</strong><br>
-        Sorry, our knowledge base does not contain an answer to this question.<br>
-        However, you can try rephrasing your query or reaching out for additional assistance.
-        """
+        if not filtered_docs_low_sim:
+            return """
+            <strong>📌 No relevant documents found.</strong><br>
+            Sorry, our knowledge base does not contain an answer to this question.<br>
+            However, you can try rephrasing your query or reaching out for additional assistance.
+            """
+        else:
+            # If only low-similarity documents exist, use them **with a disclaimer**
+            disclaimer = """
+            <strong>⚠️ Note:</strong> The following response is based on documents with **low similarity** (0.5 - 0.6).<br>
+            The answer might not be fully accurate./n
+            """
+            filtered_docs = filtered_docs_low_sim  # Use low-similarity docs
 
-    # Prepare context from first 3 relevant documents
+    # ✅ **Prepare context from first 3 relevant documents**
     context = "\n".join([doc.page_content for doc in filtered_docs[:3]])
 
-    # Fetch document links from MongoDB
+    # ✅ **Fetch document links from MongoDB**
     document_links = get_document_links(filtered_docs)
 
-    # Call OpenAI API
+    # ✅ **Call OpenAI API**
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
@@ -141,12 +154,14 @@ def answer_query(query, retriever, embedding_model):
         ]
     )
 
-    # Convert response to HTML
+    # ✅ **Convert response to HTML**
     answer_text = response.choices[0].message.content
     answer_html = markdown.markdown(answer_text)
 
-    # Format final output
+    # ✅ **Format final output**
     formatted_response = f"""
+    {disclaimer}  <!-- Adds disclaimer if applicable -->
+
     {answer_html}
 
     <strong>📄 Source Documents:</strong><br>
@@ -154,7 +169,3 @@ def answer_query(query, retriever, embedding_model):
     """
 
     return formatted_response  # Return as HTML
-
-
-
-

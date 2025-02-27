@@ -132,28 +132,33 @@ def search():
 
     return jsonify(results)
 
+
 @app.route("/api/moderate-text", methods=["POST"])
-def moderate_text():
+def moderate_text_api():
     data = request.get_json()
     user_text = data.get("text", "").strip()
 
     if not user_text:
         return jsonify({"error": "Input text is empty"}), 400
 
-    # 🔥 **GÜNCELLENMİŞ İSTEM (PROMPT)**
+    # 🔥 **GÜÇLENDİRİLMİŞ PROMPT**
     system_message = """
-    You are a text moderation AI that detects and corrects hate speech, particularly against women.
+    You are a text moderation AI specializing in correcting hate speech, particularly against women.
     
-    - If the text contains offensive or discriminatory language, rewrite it in a respectful and neutral way.
-    - If the text is already neutral and respectful, return it unchanged.
-    - Your response must always be a corrected or original version of the input.
-    - Never return "undefined" or an empty response.
-    - Ensure the meaning of the sentence remains intact while making it more inclusive.
+    **Rules:**
+    - If the input contains offensive or discriminatory language, rewrite it in a respectful and inclusive way.
+    - If the text is already neutral, return it unchanged.
+    - Do NOT return 'undefined' or empty responses.
+    - Your correction should preserve the original meaning while making it non-offensive.
 
-    Examples:
-    - "Women cannot drive cars." → "Driving ability is not determined by gender."
+    **Examples:**
+    - "Women cannot drive cars." → "Driving skills are not determined by gender."
     - "Females should not work in tech." → "Anyone can work in tech, regardless of gender."
-    - "Women can drive." → "Women can drive." (No correction needed)
+    - "Women are weak." → "Women are just as strong and capable as anyone else."
+    - "Women can drive." → "Women can drive." (No change needed)
+
+    If the input is already neutral, return it unchanged.
+    If the text cannot be corrected meaningfully, provide an educational explanation instead of 'undefined'.
     """
 
     user_message = f'Input: "{user_text}"\nCorrected Output:'
@@ -162,21 +167,25 @@ def moderate_text():
         client2 = openai.OpenAI(api_key=OPENAI_API_KEY)
 
         response = client2.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_message},
                 {"role": "user", "content": user_message},
             ],
-            temperature=0.2
+            temperature=0.3,
+            max_tokens=100,  # Boş veya yetersiz yanıt gelmesini engeller
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
 
         moderated_text = response.choices[0].message.content.strip()
 
-        # **Yanıtın "undefined" veya boş olup olmadığını kontrol et**
+        # 🚨 **"undefined" Yanıtını Engelle**
         if not moderated_text or "undefined" in moderated_text.lower():
-            moderated_text = "🚫 AI could not generate a valid correction. Please rephrase your input."
+            moderated_text = "🚫 AI could not generate a valid correction. However, gender does not determine abilities."
 
-        # **Yanıtı Kullanıcıya Gönderme**
+        # ✅ **Yanıtı Kullanıcıya Gönderme**
         if moderated_text.lower() == user_text.lower():
             return jsonify({
                 "original_text": user_text,
@@ -190,6 +199,7 @@ def moderate_text():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 @app.route('/download/<filename>')

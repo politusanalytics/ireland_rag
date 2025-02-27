@@ -1,4 +1,4 @@
-function moderateText() {
+function moderateText() {  // moderate_text yerine moderateText kullandık
     let userInput = document.getElementById("textInput").value.trim();
     let moderationBox = document.getElementById("moderationBox");
     let loading = document.getElementById("loading");

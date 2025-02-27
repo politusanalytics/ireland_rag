@@ -10,8 +10,8 @@ body {
     background-color: #f8f9fa;
     padding: 20px;
     border-right: 1px solid #ddd;
-    height: 80vh; /* Ekranın %80 yüksekliğini kullan */
-    max-height: 80vh; /* Maksimum yükseklik belirle */
+    height: 100vh; /* Ekranın %80 yüksekliğini kullan */
+    max-height: 150vh; /* Maksimum yükseklik belirle */
     position: sticky;
     top: 0;
     overflow-y: auto; /* Dikey kaydırmayı etkinleştir */
@@ -222,8 +222,8 @@ body {
 }
 
 .chat-container {
-    width: 90%;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     height: 75vh;
     background: white;
     padding: 20px;
