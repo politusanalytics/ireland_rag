@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, render_template_string
 from pymongo import MongoClient
 import os
+import openai
 from dotenv import load_dotenv
 from rag.vectorstore import load_vectorstore  # RAG vektör veritabanı
 from rag.query import answer_query  # RAG sorgu işleyicisi
@@ -173,19 +174,20 @@ def moderate_text_api():
                 {"role": "user", "content": user_message},
             ],
             temperature=0.3,
-            max_tokens=100,  # Boş veya yetersiz yanıt gelmesini engeller
+            max_tokens=100,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
         )
 
+        print("🔍 OpenAI Response:", response)  # Debugging
         moderated_text = response.choices[0].message.content.strip()
 
-        # 🚨 **"undefined" Yanıtını Engelle**
-        if not moderated_text or "undefined" in moderated_text.lower():
+        # 🚨 Check for "undefined"
+        if "undefined" in moderated_text.lower():
             moderated_text = "🚫 AI could not generate a valid correction. However, gender does not determine abilities."
 
-        # ✅ **Yanıtı Kullanıcıya Gönderme**
+        # ✅ Response Formatting
         if moderated_text.lower() == user_text.lower():
             return jsonify({
                 "original_text": user_text,
@@ -194,13 +196,12 @@ def moderate_text_api():
         else:
             return jsonify({
                 "original_text": user_text,
-                "moderated_text": "✅ Suggested correction: " + moderated_text
+                "moderated_text":  moderated_text
             })
 
     except Exception as e:
+        print("❌ Error:", str(e))  # Debugging
         return jsonify({"error": str(e)}), 500
-
-
 
 @app.route('/download/<filename>')
 def download_file(filename):

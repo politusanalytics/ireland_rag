@@ -110,20 +110,20 @@ def answer_query(query, retriever, embedding_model):
         However, you can try rephrasing your query or reaching out for additional assistance.
         """
 
-    # ✅ **Filter Out Documents Below Similarity Threshold**
+    # ✅ **Filter Documents Based on Similarity Score**
     filtered_docs = []
     filtered_docs_low_sim = []
+    
     for doc in relevant_docs:
         similarity_score = compute_text_similarity(query, doc.page_content, embedding_model)
         print(f"🔍 [DEBUG] Similarity Score: {similarity_score}")  # Debugging
+        
         if similarity_score >= 0.65:  # Highly relevant
             filtered_docs.append(doc)
         elif 0.55 <= similarity_score < 0.65:  # Low relevance
             filtered_docs_low_sim.append(doc)
 
-    # ✅ **Handle No High Similarity Results**
-    disclaimer = ""  # Default (no disclaimer)
-    
+    # ✅ **Handle Cases Where No Highly Relevant Documents Exist**
     if not filtered_docs:
         if not filtered_docs_low_sim:
             return """
@@ -132,12 +132,13 @@ def answer_query(query, retriever, embedding_model):
             However, you can try rephrasing your query or reaching out for additional assistance.
             """
         else:
-            # If only low-similarity documents exist, use them **with a disclaimer**
-            disclaimer = """
-            <strong>⚠️ Note:</strong> The following response is based on documents with **low similarity** (0.5 - 0.6).<br>
-            The answer might not be fully accurate./n
+            # If only low-similarity documents exist, **DO NOT generate an AI answer**
+            document_links = get_document_links(filtered_docs_low_sim)
+            return f"""
+            <strong>📌 The exact answer could not be generated.</strong><br>
+            However, you may find relevant information in the following sources:<br>
+            {document_links}
             """
-            filtered_docs = filtered_docs_low_sim  # Use low-similarity docs
 
     # ✅ **Prepare context from first 3 relevant documents**
     context = "\n".join([doc.page_content for doc in filtered_docs[:3]])
@@ -160,8 +161,6 @@ def answer_query(query, retriever, embedding_model):
 
     # ✅ **Format final output**
     formatted_response = f"""
-    {disclaimer}  <!-- Adds disclaimer if applicable -->
-
     {answer_html}
 
     <strong>📄 Source Documents:</strong><br>

@@ -22,9 +22,10 @@
 </head>
 <body>
     <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Education Platform</a>
+            <a class="navbar-brand" href="{{ url_for('index') }}">Education Platform</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,14 +38,17 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Materials</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Trainings</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
-                
+
+                <!-- Chatbot ve Correction Bot Butonları -->
+                <a href="{{ url_for('chatbot') }}" class="btn btn-primary ms-3" onclick="event.preventDefault(); window.location.href=this.href;">Chatbot</a>
+                <a href="{{ url_for('text_moderation') }}" class="btn btn-warning ms-3">Correction Bot</a>
             </div>
         </div>
     </nav>
+
+
 
     <!-- Main Container -->
     <div class="container-fluid">
