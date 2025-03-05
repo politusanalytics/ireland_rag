@@ -1,15 +1,15 @@
 .env
-# Ortak gereksiz dosyalar
+# Common junk files
 __pycache__/
 .DS_Store
 *.log
 *.sqlite3
 *.safetensors
 
-# Sanal ortam klasörü (Python)
+# Virtual environment folder (Python)
 venv/
 rag_env/
 
-# FAISS ve büyük veri klasörleri
+# FAISS and large data folders
 rag/Training Module Files/
 Training Module Files/
