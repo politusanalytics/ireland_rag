@@ -1,1 +1,0 @@
-OPENAI_API_KEY="senin_openai_api_anahtarin"
