@@ -1,6 +1,6 @@
-# Women Hate Speech Detection & Correction Bot for Ireland
+# Women Hate Speech Detection & Correction Bot for Northern Ireland
 
-This project focuses on detecting and correcting hate speech directed at women, specifically tailored for Ireland. Using a Retrieval-Augmented Generation (RAG) model, the system processes user inputs, identifies hate speech, and provides real-time corrections with contextual explanations.
+This project focuses on detecting and correcting hate speech directed at women, specifically tailored for Northern Ireland. Using a Retrieval-Augmented Generation (RAG) model, the system processes user inputs, identifies hate speech, and provides real-time corrections with contextual explanations.
 
 **Key Features:**
 
